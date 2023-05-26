@@ -7,7 +7,7 @@
  *  Return: exits with a given exit status
  *         (0) if inf.argv[0] != "exit"
  */
-int _toexit(inf_t *inf)
+int _toexit(info_t *inf)
 {
 	int exitcheck;
 
@@ -35,7 +35,7 @@ int _toexit(inf_t *inf)
  *          constant function prototype.
  *  Return: Always 0
  */
-int _mydir(inf_t *inf)
+int _mydir(info_t *inf)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -85,7 +85,7 @@ int _mydir(inf_t *inf)
  *          constant function prototype.
  *  Return: Always 0
  */
-int _myproc(inf_t *inf)
+int _myproc(info_t *inf)
 {
 	char **arg_array;
 

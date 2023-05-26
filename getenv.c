@@ -6,7 +6,7 @@
  *          constant function prototype.
  * Return: Always 0
  */
-char **get_environment(inf_t *inf)
+char **get_environment(info_t *inf)
 {
 	if (!inf->environ || inf->env_changed)
 	{
@@ -24,7 +24,7 @@ char **get_environment(inf_t *inf)
  *  Return: 1 on delete, 0 otherwise
  * @var: the string env var property
  */
-int _unsetenvironment(inf_t *inf, char *var)
+int _unsetenvironment(info_t *inf, char *var)
 {
 	list_t *node = inf->env;
 	size_t i = 0;
@@ -58,7 +58,7 @@ int _unsetenvironment(inf_t *inf, char *var)
  * @value: the string env var value
  *  Return: Always 0
  */
-int _setenvironment(inf_t *inf, char *var, char *value)
+int _setenvironment(info_t *inf, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;
