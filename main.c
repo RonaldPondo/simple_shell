@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * main - entry point
@@ -7,47 +7,38 @@
  *
  * Return: 0 on success, 1 on error
  */
-
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-	int fd = 0;
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-	if (argc == 2)
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
+
+	if (ac == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
+		fd = open(av[1], O_RDONLY);
 		if (fd == -1)
 		{
 			if (errno == EACCES)
 				exit(126);
 			if (errno == ENOENT)
 			{
-				fprintf(stderr, "%s: 0: Can't open %s\n", argv[0], argv[1]);
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
 				exit(127);
-			} else
-				exit(EXIT_FAILURE);
+			}
+			return (EXIT_FAILURE);
 		}
-	} else
-		fd = 0;
-
-	while (1)
-	{
-		char line[1024];
-
-		fgets(line, sizeof(line), fd);
-
-		if (feof(fd))
-			break;
-
-		char *command = strtok(line, " ");
-
-		if (command == NULL)
-			continue;
-
-		int status = system(command);
-
-		if (status != 0)
-			printf("Command '%s' failed with status %d\n", command, status);
+		info->readfd = fd;
 	}
-
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
 	return (EXIT_SUCCESS);
 }
