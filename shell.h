@@ -174,17 +174,17 @@ char *convert_number(long int, int, int);
 void remove_comments(char *);
 
 /* toem_builtin.c */
-int _myexit(info_t *);
-int _mycd(info_t *);
-int _myhelp(info_t *);
+int _myexit(inf_t *);
+int _mycd(inf_t *);
+int _myhelp(inf_t *);
 
 /* toem_builtin1.c */
-int _myhistory(info_t *);
-int _myalias(info_t *);
+int _myhistory(inf_t *);
+int _myalias(inf_t *);
 
 /*toem_getline.c */
-ssize_t get_input(info_t *);
-int _getline(info_t *, char **, size_t *);
+ssize_t get_input(inf_t *);
+int _getline(inf_t *, char **, size_t *);
 void sigintHandler(int);
 
 /* toem_getinfo.c */
@@ -193,23 +193,23 @@ void set_info(info_t *, char **);
 void free_info(info_t *, int);
 
 /* toem_environ.c */
-char *_getenv(info_t *, const char *);
-int _myenv(info_t *);
-int _mysetenv(info_t *);
-int _myunsetenv(info_t *);
-int populate_env_list(info_t *);
+char *_getenv(inf_t *, const char *);
+int _myenv(inf_t *);
+int _mysetenv(inf_t *);
+int _myunsetenv(inf_t *);
+int populate_env_list(inf_t *);
 
 /* toem_getenv.c */
-char **get_environ(info_t *);
-int _unsetenv(info_t *, char *);
-int _setenv(info_t *, char *, char *);
+char **get_environ(inf_t *);
+int _unsetenv(inf_t *, char *);
+int _setenv(inf_t *, char *, char *);
 
 /* toem_history.c */
-char *get_history_file(info_t *info);
-int write_history(info_t *info);
-int read_history(info_t *info);
-int build_history_list(info_t *info, char *buf, int linecount);
-int renumber_history(info_t *info);
+char *get_hist_file(info_t *info);
+int write_hist(info_t *info);
+int read_hist(info_t *info);
+int build_hist_list(info_t *info, char *buf, int linecount);
+int renumber_hist(info_t *info);
 
 /* toem_lists.c */
 list_t *add_node(list_t **, const char *, int);
